@@ -11,3 +11,6 @@ type Todo struct {
 	UpdatedAt  time.Time
 	DeleatedAt time.Time
 }
+func validate(){
+	
+}

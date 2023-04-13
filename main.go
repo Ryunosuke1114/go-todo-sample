@@ -2,7 +2,9 @@ package main
 
 import (
 	"go-qr-app/model"
+
 	// "strconv"
+	"math/rand"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -18,10 +20,15 @@ func main() {
 
 	router.GET("/", func(ctx *gin.Context) {
 		var todos = []model.Todo{
-			{Text: "test1", CreatedAt: time.Now(), UpdatedAt: time.Now()},
-			{Text: "test2", CreatedAt: time.Now(), UpdatedAt: time.Now()},
-			{Text: "test3", CreatedAt: time.Now(), UpdatedAt: time.Now()},
-			{Text: "test4", CreatedAt: time.Now(), UpdatedAt: time.Now()},
+			{
+				ID:        rand.Int(),
+				Text:      "test1",
+				CreatedAt: time.Now(),
+				UpdatedAt: time.Now(),
+			},
+			{ID: rand.Int(), Text: "test2", CreatedAt: time.Now(), UpdatedAt: time.Now()},
+			{ID: rand.Int(), Text: "test3", CreatedAt: time.Now(), UpdatedAt: time.Now()},
+			{ID: rand.Int(), Text: "test4", CreatedAt: time.Now(), UpdatedAt: time.Now()},
 		}
 
 		ctx.HTML(200, "index.html", gin.H{"todos": todos})
