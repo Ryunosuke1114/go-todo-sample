@@ -1,11 +1,14 @@
 package model
 
 import (
-	"github.com/jinzhu/gorm"
+	"time"
 )
 
 type Todo struct {
-	gorm.Model
-	Text   string
-	Status string
+	// ID         int
+	Text       string
+	CreatedAt  time.Time
+	UpdatedAt  time.Time
+	DeleatedAt time.Time
 }
+
