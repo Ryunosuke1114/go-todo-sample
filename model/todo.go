@@ -5,10 +5,9 @@ import (
 )
 
 type Todo struct {
-	// ID         int
+	ID         int
 	Text       string
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
 	DeleatedAt time.Time
 }
-
