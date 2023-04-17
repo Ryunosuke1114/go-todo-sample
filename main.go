@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"go-qr-app/model"
 
 	"math/rand"
@@ -41,32 +40,28 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-
 		var todo = GetOne(id)
-		fmt.Println("todo出します")
-		fmt.Println(todo)
-
 		ctx.HTML(200, "detail.html", gin.H{"todo": todo})
 	})
 
-	// router.POST("/new", func(ctx *gin.Context) {
-	// 	ID := ctx.PostForm("ID")
-	// 	text := ctx.PostForm("Text")
-	// 	var newTodo
-	// 	ctx.Redirect(302, "/")
-	// })
+	router.POST("/new", func(ctx *gin.Context) {
+		id := rand.Int()
+		text := ctx.PostForm("text")
+		CreateTodo(id, text)
+		ctx.Redirect(302, "/")
+	})
 
-	// 	router.POST("/update/:id", func(ctx *gin.Context) {
-	// 		n := ctx.Param("id")
-	// 		id, err := strconv.Atoi(n)
-	// 		if err != nil {
-	// 			panic(err)
-	// 		}
-	// 		text := ctx.PostForm("text")
-	// 		status := ctx.PostForm("status")
-	// 		dbUpdate(id, text, status)
-	// 		ctx.Redirect(302, "/")
-	// 	})
+		// router.POST("/update/:id", func(ctx *gin.Context) {
+		// 	n := ctx.Param("id")
+		// 	id, err := strconv.Atoi(n)
+		// 	if err != nil {
+		// 		panic(err)
+		// 	}
+		// 	text := ctx.PostForm("text")
+		// 	status := ctx.PostForm("status")
+		// 	dbUpdate(id, text, status)
+		// 	ctx.Redirect(302, "/")
+		// })
 
 	// })
 
@@ -100,4 +95,15 @@ func GetOne(targetID int) *model.Todo {
 		}
 	}
 	return nil
+}
+
+func CreateTodo(id int, text string) {
+	newTodo := model.Todo{
+		ID:        id,
+		Text:      text,
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+	}
+
+	todos = append(todos, newTodo)
 }
