@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Sample App</title>
-</head>
+<h2>追加</h2>
+<form method="post" action="/new">
+    <p>内容<input type="text" name="text" size="30" placeholder="入力してください"></p>
+    <p><input type="submit" value="Send"></p>
+</form>
 
 <body>
     <h1>Todo List</h1>
@@ -31,6 +32,7 @@
             {{end}}
         </tbody>
     </table>
+
 </body>
 
 </html>
