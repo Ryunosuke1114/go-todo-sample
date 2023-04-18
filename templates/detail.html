@@ -6,6 +6,12 @@
     <title>Detail Sample</title>
 </head>
 
+<h2>変更</h2>
+<form method="post" action="/update/{{.todo.ID}}">
+    <p>内容<input type="text" name="text" size="30" placeholder="入力してください"></p>
+    <p><input type="submit" value="Update"></p>
+</form>
+
 <body>
     <h1>Todo Detail</h1>
     <table>
