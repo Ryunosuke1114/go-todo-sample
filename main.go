@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"go-qr-app/model"
 
 	"math/rand"
@@ -51,19 +52,17 @@ func main() {
 		ctx.Redirect(302, "/")
 	})
 
-		// router.POST("/update/:id", func(ctx *gin.Context) {
-		// 	n := ctx.Param("id")
-		// 	id, err := strconv.Atoi(n)
-		// 	if err != nil {
-		// 		panic(err)
-		// 	}
-		// 	text := ctx.PostForm("text")
-		// 	status := ctx.PostForm("status")
-		// 	dbUpdate(id, text, status)
-		// 	ctx.Redirect(302, "/")
-		// })
-
-	// })
+	router.POST("/update/:id", func(ctx *gin.Context) {
+		fmt.Println("PUT now")
+		n := ctx.Param("id")
+		id, err := strconv.Atoi(n)
+		if err != nil {
+			panic(err)
+		}
+		text := ctx.PostForm("text")
+		UpdateTodo(id, text)
+		ctx.Redirect(302, "/")
+	})
 
 	//削除確認
 	// router.GET("/delete_check/:id", func(ctx *gin.Context) {
@@ -106,4 +105,14 @@ func CreateTodo(id int, text string) {
 	}
 
 	todos = append(todos, newTodo)
+}
+
+func UpdateTodo(id int, text string) {
+	//todosのIDが一致するものを更新する
+	for i, todo := range todos {
+		if todo.ID == id {
+			todos[i].Text = text
+			todos[i].UpdatedAt = time.Now()
+		}
+	}
 }
