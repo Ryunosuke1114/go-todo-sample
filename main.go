@@ -75,15 +75,15 @@ func main() {
 	// 	ctx.HTML(200, "delete.html", gin.H{"todo": todo})
 	// })
 
-	// router.POST("/delete/:id", func(ctx *gin.Context) {
-	// 	n := ctx.Param("id")
-	// 	id, err := strconv.Atoi(n)
-	// 	if err != nil {
-	// 		panic(err)
-	// 	}
-	// 	dbDeleta(id)
-	// 	ctx.Redirect(302, "/")
-	// })
+	router.POST("/delete/:id", func(ctx *gin.Context) {
+		n := ctx.Param("id")
+		id, err := strconv.Atoi(n)
+		if err != nil {
+			panic(err)
+		}
+		DeleteTodo(id)
+		ctx.Redirect(302, "/")
+	})
 	router.Run()
 }
 
@@ -113,6 +113,15 @@ func UpdateTodo(id int, text string) {
 		if todo.ID == id {
 			todos[i].Text = text
 			todos[i].UpdatedAt = time.Now()
+		}
+	}
+}
+
+// todosのIDが一致するものを削除する
+func DeleteTodo(id int) {
+	for i, todo := range todos {
+		if todo.ID == id {
+			todos = append(todos[:i], todos[i+1:]...)
 		}
 	}
 }

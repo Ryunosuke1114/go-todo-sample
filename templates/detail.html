@@ -12,26 +12,30 @@
     <p><input type="submit" value="Update"></p>
 </form>
 
-<body>
-    <h1>Todo Detail</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Text</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{.todo.ID}}</td>
-                <td>{{.todo.Text}}</td>
-                <td>{{.todo.CreatedAt.Format "2006-01-02 15:04:05"}}</td>
-                <td>{{.todo.UpdatedAt.Format "2006-01-02 15:04:05"}}</td>
-            </tr>
-        </tbody>
-    </table>
-</body>
+<h2>削除</h2>
+<form method="post" action="/delete/{{.todo.ID}}">
+    <p><input type="submit" value="Delete"></p>
+
+    <body>
+        <h1>Todo Detail</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Text</th>
+                    <th>CreatedAt</th>
+                    <th>UpdatedAt</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{.todo.ID}}</td>
+                    <td>{{.todo.Text}}</td>
+                    <td>{{.todo.CreatedAt.Format "2006-01-02 15:04:05"}}</td>
+                    <td>{{.todo.UpdatedAt.Format "2006-01-02 15:04:05"}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
 
 </html>
