@@ -3,7 +3,7 @@ package main
 import (
 	//repositoryをimport
 
-	repo "go-qr-app/domain/repository"
+	"go-qr-app/infra"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,11 +13,14 @@ func main() {
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
 
-	todos := repo.TodoRepo.GET( )
+	repo := infra.NewTodoRepo()
 
 	router.GET("/", func(ctx *gin.Context) {
+		todos := repo.Get()
 		ctx.HTML(200, "index.html", gin.H{"todos": todos})
 	})
+
+	router.Run()
 
 	// 	router.GET("/detail/:id", func(ctx *gin.Context) {
 	// 		p := ctx.Param("id")
@@ -58,7 +61,6 @@ func main() {
 	// 		ctx.Redirect(302, "/")
 	// 	})
 
-	router.Run()
 	// }
 
 	// func GetOne(targetID int) *entity.Todo {

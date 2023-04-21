@@ -2,6 +2,7 @@ package infra
 
 import (
 	"go-qr-app/domain/entity"
+	repo "go-qr-app/domain/repository"
 	"math/rand"
 
 	"time"
@@ -11,11 +12,11 @@ type TodoRepo struct {
 	todos []*entity.Todo
 }
 
-func NewTodoRepo() *TodoRepo {
+func NewTodoRepo() repo.TodoRepo {
 	return &TodoRepo{}
 }
 
-func (t *TodoRepo) GET() []*entity.Todo {
+func (*TodoRepo) Get() []*entity.Todo {
 	var todos = []*entity.Todo{
 		{
 			ID:         rand.Int(),
