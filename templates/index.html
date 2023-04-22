@@ -22,10 +22,10 @@
         <tbody>
             {{range .todos}}
             <tr>
-                <!-- <td>
-                    <a href="/detail/{{.ID}}">
+                <td>
+                    <a href="/detail/:id">
                         {{.ID}}</a>
-                </td> -->
+                </td>
                 <td>{{.ID}}</td>
                 <td>{{.Text}}</td>
                 <td>{{.CreatedAt.Format "2006-01-02 15:04:05"}}</td>

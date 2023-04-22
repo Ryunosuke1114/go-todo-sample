@@ -1,9 +1,11 @@
 package main
 
 import (
-	//repositoryをimport
-
+	"go-qr-app/domain/entity"
 	"go-qr-app/infra"
+
+	// "math/rand"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -20,17 +22,22 @@ func main() {
 		ctx.HTML(200, "index.html", gin.H{"todos": todos})
 	})
 
-	router.Run()
-
-	// 	router.GET("/detail/:id", func(ctx *gin.Context) {
-	// 		p := ctx.Param("id")
-	// 		id, err := strconv.Atoi(p)
-	// 		if err != nil {
-	// 			panic(err)
-	// 		}
-	// 		var todo = GetOne(id)
-	// 		ctx.HTML(200, "detail.html", gin.H{"todo": todo})
-	// 	})
+	router.GET("/detail/:id", func(ctx *gin.Context) {
+		// p := ctx.Param("id")
+		// id, err := strconv.Atoi(p)
+		// if err != nil {
+		// 	panic(err)
+		// }
+		// var todo = GetOne(id)
+		var todo = entity.Todo{
+			ID:         1,
+			Text:       "test1",
+			CreatedAt:  time.Now(),
+			UpdatedAt:  time.Now(),
+			DeleatedAt: time.Time{},
+		}
+		ctx.HTML(200, "detail.html", gin.H{"todo": todo})
+	})
 
 	// 	router.POST("/new", func(ctx *gin.Context) {
 	// 		id := rand.Int()
@@ -60,7 +67,7 @@ func main() {
 	// 		DeleteTodo(id)
 	// 		ctx.Redirect(302, "/")
 	// 	})
-
+	router.Run()
 	// }
 
 	// func GetOne(targetID int) *entity.Todo {
