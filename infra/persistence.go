@@ -3,7 +3,6 @@ package infra
 import (
 	"go-qr-app/domain/entity"
 	repo "go-qr-app/domain/repository"
-	"math/rand"
 
 	"time"
 )
@@ -16,18 +15,40 @@ func NewTodoRepo() repo.TodoRepo {
 	return &TodoRepo{}
 }
 
+// repositoryの実装
 func (*TodoRepo) Get() []*entity.Todo {
 	var todos = []*entity.Todo{
 		{
-			ID:         rand.Int(),
+			ID:         1,
 			Text:       "test1",
 			CreatedAt:  time.Now(),
 			UpdatedAt:  time.Now(),
 			DeleatedAt: time.Time{},
 		},
-		{ID: rand.Int(), Text: "test2", CreatedAt: time.Now(), UpdatedAt: time.Now()},
-		{ID: rand.Int(), Text: "test3", CreatedAt: time.Now(), UpdatedAt: time.Now()},
-		{ID: rand.Int(), Text: "test4", CreatedAt: time.Now(), UpdatedAt: time.Now()},
+		{ID: 2, Text: "test2", CreatedAt: time.Now(), UpdatedAt: time.Now()},
+		{ID: 3, Text: "test3", CreatedAt: time.Now(), UpdatedAt: time.Now()},
+		{ID: 4, Text: "test4", CreatedAt: time.Now(), UpdatedAt: time.Now()},
 	}
 	return todos
+}
+
+func (*TodoRepo) GetOne(targetID int) *entity.Todo {
+	var todos = []*entity.Todo{
+		{
+			ID:         1,
+			Text:       "test1",
+			CreatedAt:  time.Now(),
+			UpdatedAt:  time.Now(),
+			DeleatedAt: time.Time{},
+		},
+		{ID: 2, Text: "test2", CreatedAt: time.Now(), UpdatedAt: time.Now()},
+		{ID: 3, Text: "test3", CreatedAt: time.Now(), UpdatedAt: time.Now()},
+		{ID: 4, Text: "test4", CreatedAt: time.Now(), UpdatedAt: time.Now()},
+	}
+	for _, todo := range todos {
+		if todo.ID == targetID {
+			return todo
+		}
+	}
+	return nil
 }

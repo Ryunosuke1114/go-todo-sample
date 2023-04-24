@@ -1,11 +1,10 @@
 package main
 
 import (
-	"go-qr-app/domain/entity"
 	"go-qr-app/infra"
+	"strconv"
 
 	// "math/rand"
-	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -23,19 +22,12 @@ func main() {
 	})
 
 	router.GET("/detail/:id", func(ctx *gin.Context) {
-		// p := ctx.Param("id")
-		// id, err := strconv.Atoi(p)
-		// if err != nil {
-		// 	panic(err)
-		// }
-		// var todo = GetOne(id)
-		var todo = entity.Todo{
-			ID:         1,
-			Text:       "test1",
-			CreatedAt:  time.Now(),
-			UpdatedAt:  time.Now(),
-			DeleatedAt: time.Time{},
+		p := ctx.Param("id")
+		id, err := strconv.Atoi(p)
+		if err != nil {
+			panic(err)
 		}
+		var todo = repo.GetOne(id)
 		ctx.HTML(200, "detail.html", gin.H{"todo": todo})
 	})
 
@@ -68,44 +60,34 @@ func main() {
 	// 		ctx.Redirect(302, "/")
 	// 	})
 	router.Run()
-	// }
-
-	// func GetOne(targetID int) *entity.Todo {
-	// 	for _, todo := range todos {
-	// 		if todo.ID == targetID {
-	// 			return &todo
-	// 		}
-	// 	}
-	// 	return nil
-	// }
-
-	// func CreateTodo(id int, text string) {
-	// 	newTodo := entity.Todo{
-	// 		ID:        id,
-	// 		Text:      text,
-	// 		CreatedAt: time.Now(),
-	// 		UpdatedAt: time.Now(),
-	// 	}
-
-	// 	todos = append(todos, newTodo)
-	// }
-
-	// func UpdateTodo(id int, text string) {
-	// 	//todosのIDが一致するものを更新する
-	// 	for i, todo := range todos {
-	// 		if todo.ID == id {
-	// 			todos[i].Text = text
-	// 			todos[i].UpdatedAt = time.Now()
-	// 		}
-	// 	}
-	// }
-
-	// // todosのIDが一致するものを削除する
-	//
-	//	func DeleteTodo(id int) {
-	//		for i, todo := range todos {
-	//			if todo.ID == id {
-	//				todos = append(todos[:i], todos[i+1:]...)
-	//			}
-	//		}
 }
+
+// func CreateTodo(id int, text string) {
+// 	newTodo := entity.Todo{
+// 		ID:        id,
+// 		Text:      text,
+// 		CreatedAt: time.Now(),
+// 		UpdatedAt: time.Now(),
+// 	}
+
+// 	todos = append(todos, newTodo)
+// }
+
+// func UpdateTodo(id int, text string) {
+// 	//todosのIDが一致するものを更新する
+// 	for i, todo := range todos {
+// 		if todo.ID == id {
+// 			todos[i].Text = text
+// 			todos[i].UpdatedAt = time.Now()
+// 		}
+// 	}
+// }
+
+// // todosのIDが一致するものを削除する
+//
+//	func DeleteTodo(id int) {
+//		for i, todo := range todos {
+//			if todo.ID == id {
+//				todos = append(todos[:i], todos[i+1:]...)
+//			}
+//		}

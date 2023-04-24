@@ -4,4 +4,5 @@ import "go-qr-app/domain/entity"
 
 type TodoRepo interface {
 	Get() []*entity.Todo
+	GetOne(targetID int) *entity.Todo
 }
