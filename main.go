@@ -2,6 +2,7 @@ package main
 
 import (
 	"go-qr-app/handler"
+	"go-qr-app/infra"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,7 +14,7 @@ func main() {
 
 	router.GET("/", func(ctx *gin.Context) {
 		//handlerのGetを呼び出す
-		todos := handler.NewTodo().Get()
+		todos := handler.NewTodo(infra.NewTodoRepo()).Get()
 		ctx.HTML(200, "index.html", gin.H{"todos": todos})
 	})
 
