@@ -20,6 +20,7 @@
             </tr>
         </thead>
         <tbody>
+            {{if eq .user.Status 0}}
             {{range .todos}}
             <tr>
                 <!-- <td>
@@ -31,6 +32,35 @@
                 <td>{{.CreatedAt.Format "2006-01-02 15:04:05"}}</td>
                 <td>{{.UpdatedAt.Format "2006-01-02 15:04:05"}}</td>
             </tr>
+            {{end}}
+            {{else if eq .user.Status 1}}
+            {{range .todos}}
+            <tr>
+                <!-- <td>
+                    <a href="/detail/{{.ID}}">
+                        {{.ID}}</a>
+                </td> -->
+                <td>{{.ID}}</td>
+                <td>{{.Text}}</td>
+                <td>{{.CreatedAt.Format "2006-01-02 15:04:05"}}</td>
+                <td>{{.UpdatedAt.Format "2006-01-02 15:04:05"}}</td>
+            </tr>
+            {{end}}
+            {{else if eq .user.Status 2}}
+            {{range .todos}}
+            <tr>
+                <!-- <td>
+                    <a href="/detail/{{.ID}}">
+                        {{.ID}}</a>
+                </td> -->
+                <td>{{.ID}}</td>
+                <td>{{.Text}}</td>
+                <td>{{.CreatedAt.Format "2006-01-02 15:04:05"}}</td>
+                <td>{{.UpdatedAt.Format "2006-01-02 15:04:05"}}</td>
+            </tr>
+            {{end}}
+            {{else}}
+            <p>Please sign in to continue.</p>
             {{end}}
         </tbody>
     </table>

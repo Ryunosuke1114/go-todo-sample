@@ -1,7 +1,8 @@
 package repo
 
-import "go-qr-app/domain/entity"
+import "go-qr-app/domain/model/todo"
+
 
 type Todo interface {
-	Get() []*entity.Todo
+	Get() []*todo.Todo
 }

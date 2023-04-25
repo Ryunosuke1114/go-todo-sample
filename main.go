@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go-qr-app/domain/model/user"
 	"go-qr-app/handler"
 	"go-qr-app/infra"
 
@@ -13,11 +14,12 @@ func main() {
 	router.LoadHTMLGlob("templates/*.html")
 
 	router.GET("/", func(ctx *gin.Context) {
+		user := user.User{Status: 1}
 		//handlerのGetを呼び出す
 		todos := handler.NewTodo(infra.NewTodoRepo()).Get()
-		ctx.HTML(200, "index.html", gin.H{"todos": todos})
+		println(user.Status)
+		ctx.HTML(200, "index.html", gin.H{"todos": todos, "user": user})
 	})
-
 	router.Run()
 
 	// 	router.GET("/detail/:id", func(ctx *gin.Context) {

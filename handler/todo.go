@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"go-qr-app/domain/entity"
+	"go-qr-app/domain/model/todo"
 	repo "go-qr-app/domain/repository"
 )
 
@@ -11,7 +11,7 @@ func NewTodo(repo repo.Todo) *Todo {
 	return &Todo{repo: repo}
 }
 
-func (t *Todo) Get() []*entity.Todo {
+func (t *Todo) Get() []*todo.Todo {
 	todos := t.repo.Get()
 	return todos
 }
