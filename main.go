@@ -1,9 +1,7 @@
 package main
 
 import (
-	//repositoryをimport
-
-	"go-qr-app/infra"
+	"go-qr-app/handler"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,10 +11,9 @@ func main() {
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
 
-	repo := infra.NewTodoRepo()
-
 	router.GET("/", func(ctx *gin.Context) {
-		todos := repo.Get()
+		//handlerのGetを呼び出す
+		todos := handler.NewTodo().Get()
 		ctx.HTML(200, "index.html", gin.H{"todos": todos})
 	})
 
@@ -60,45 +57,35 @@ func main() {
 	// 		DeleteTodo(id)
 	// 		ctx.Redirect(302, "/")
 	// 	})
-
-	// }
-
-	// func GetOne(targetID int) *entity.Todo {
-	// 	for _, todo := range todos {
-	// 		if todo.ID == targetID {
-	// 			return &todo
-	// 		}
-	// 	}
-	// 	return nil
-	// }
-
-	// func CreateTodo(id int, text string) {
-	// 	newTodo := entity.Todo{
-	// 		ID:        id,
-	// 		Text:      text,
-	// 		CreatedAt: time.Now(),
-	// 		UpdatedAt: time.Now(),
-	// 	}
-
-	// 	todos = append(todos, newTodo)
-	// }
-
-	// func UpdateTodo(id int, text string) {
-	// 	//todosのIDが一致するものを更新する
-	// 	for i, todo := range todos {
-	// 		if todo.ID == id {
-	// 			todos[i].Text = text
-	// 			todos[i].UpdatedAt = time.Now()
-	// 		}
-	// 	}
-	// }
-
-	// // todosのIDが一致するものを削除する
-	//
-	//	func DeleteTodo(id int) {
-	//		for i, todo := range todos {
-	//			if todo.ID == id {
-	//				todos = append(todos[:i], todos[i+1:]...)
-	//			}
-	//		}
+	router.Run()
 }
+
+// func CreateTodo(id int, text string) {
+// 	newTodo := entity.Todo{
+// 		ID:        id,
+// 		Text:      text,
+// 		CreatedAt: time.Now(),
+// 		UpdatedAt: time.Now(),
+// 	}
+
+// 	todos = append(todos, newTodo)
+// }
+
+// func UpdateTodo(id int, text string) {
+// 	//todosのIDが一致するものを更新する
+// 	for i, todo := range todos {
+// 		if todo.ID == id {
+// 			todos[i].Text = text
+// 			todos[i].UpdatedAt = time.Now()
+// 		}
+// 	}
+// }
+
+// // todosのIDが一致するものを削除する
+//
+//	func DeleteTodo(id int) {
+//		for i, todo := range todos {
+//			if todo.ID == id {
+//				todos = append(todos[:i], todos[i+1:]...)
+//			}
+//		}

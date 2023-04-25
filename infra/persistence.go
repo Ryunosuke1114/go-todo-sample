@@ -8,15 +8,15 @@ import (
 	"time"
 )
 
-type TodoRepo struct {
+type Todo struct {
 	todos []*entity.Todo
 }
 
-func NewTodoRepo() repo.TodoRepo {
-	return &TodoRepo{}
+func NewTodoRepo() repo.Todo {
+	return &Todo{}
 }
 
-func (*TodoRepo) Get() []*entity.Todo {
+func (*Todo) Get() []*entity.Todo {
 	var todos = []*entity.Todo{
 		{
 			ID:         rand.Int(),

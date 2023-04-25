@@ -2,6 +2,6 @@ package repo
 
 import "go-qr-app/domain/entity"
 
-type TodoRepo interface {
+type Todo interface {
 	Get() []*entity.Todo
 }
