@@ -4,6 +4,7 @@ import (
 	"go-qr-app/domain/model/user"
 	"go-qr-app/handler"
 	"go-qr-app/infra"
+	"go-qr-app/usecase"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,11 +15,12 @@ func main() {
 	router.LoadHTMLGlob("templates/*.html")
 
 	router.GET("/", func(ctx *gin.Context) {
-		user := user.User{Status: 1}
-		//handlerのGetを呼び出す
+		user := user.User{Status: 3}
 		todos := handler.NewTodo(infra.NewTodoRepo()).Get()
+		println("ユーザーのステータス")
 		println(user.Status)
-		ctx.HTML(200, "index.html", gin.H{"todos": todos, "user": user})
+		filterdTodos := usecase.TodoFilter(int(user.Status), todos)
+		ctx.HTML(200, "index.html", gin.H{"todos": filterdTodos})
 	})
 	router.Run()
 
