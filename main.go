@@ -17,8 +17,6 @@ func main() {
 	router.GET("/", func(ctx *gin.Context) {
 		user := user.User{Status: 3}
 		todos := handler.NewTodo(infra.NewTodoRepo()).Get()
-		println("ユーザーのステータス")
-		println(user.Status)
 		filterdTodos := usecase.TodoFilter(int(user.Status), todos)
 		ctx.HTML(200, "index.html", gin.H{"todos": filterdTodos})
 	})
