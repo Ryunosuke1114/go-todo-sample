@@ -1,23 +1,22 @@
 package infra
 
 import (
-	"go-qr-app/domain/entity"
+	"go-qr-app/domain/model/todo"
 	repo "go-qr-app/domain/repository"
 
 	"time"
 )
 
-type TodoRepo struct {
-	todos []*entity.Todo
+type Todo struct {
+	todos []*todo.Todo
 }
 
-func NewTodoRepo() repo.TodoRepo {
-	return &TodoRepo{}
+func NewTodoRepo() repo.Todo {
+	return &Todo{}
 }
 
-// repositoryの実装
-func (*TodoRepo) Get() []*entity.Todo {
-	var todos = []*entity.Todo{
+func (*Todo) Get() []*todo.Todo {
+	var todos = []*todo.Todo{
 		{
 			ID:         1,
 			Text:       "test1",
@@ -25,15 +24,30 @@ func (*TodoRepo) Get() []*entity.Todo {
 			UpdatedAt:  time.Now(),
 			DeleatedAt: time.Time{},
 		},
-		{ID: 2, Text: "test2", CreatedAt: time.Now(), UpdatedAt: time.Now()},
-		{ID: 3, Text: "test3", CreatedAt: time.Now(), UpdatedAt: time.Now()},
-		{ID: 4, Text: "test4", CreatedAt: time.Now(), UpdatedAt: time.Now()},
+		{
+			ID:        2,
+			Text:      "test2",
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
+		},
+		{
+			ID:        3,
+			Text:      "test3",
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
+		},
+		{
+			ID:        4,
+			Text:      "test4",
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
+		},
 	}
 	return todos
 }
 
-func (*TodoRepo) GetOne(targetID int) *entity.Todo {
-	var todos = []*entity.Todo{
+func (*Todo) GetOne(targetID int) *todo.Todo {
+	var todos = []*todo.Todo{
 		{
 			ID:         1,
 			Text:       "test1",
@@ -41,9 +55,23 @@ func (*TodoRepo) GetOne(targetID int) *entity.Todo {
 			UpdatedAt:  time.Now(),
 			DeleatedAt: time.Time{},
 		},
-		{ID: 2, Text: "test2", CreatedAt: time.Now(), UpdatedAt: time.Now()},
-		{ID: 3, Text: "test3", CreatedAt: time.Now(), UpdatedAt: time.Now()},
-		{ID: 4, Text: "test4", CreatedAt: time.Now(), UpdatedAt: time.Now()},
+		{
+			ID: 2, Text: "test2",
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
+		},
+		{
+			ID:        3,
+			Text:      "test3",
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
+		},
+		{
+			ID:        4,
+			Text:      "test4",
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
+		},
 	}
 	for _, todo := range todos {
 		if todo.ID == targetID {

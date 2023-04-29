@@ -1,10 +1,11 @@
 package main
 
 import (
+	"go-qr-app/domain/model/user"
+	"go-qr-app/handler"
 	"go-qr-app/infra"
+	"go-qr-app/usecase"
 	"strconv"
-
-	// "math/rand"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,20 +15,20 @@ func main() {
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
 
-	repo := infra.NewTodoRepo()
-
 	router.GET("/", func(ctx *gin.Context) {
-		todos := repo.Get()
-		ctx.HTML(200, "index.html", gin.H{"todos": todos})
+		user := user.User{Status: 3}
+		todos := handler.NewTodo(infra.NewTodoRepo()).Get()
+		filterdTodos := usecase.TodoFilter(int(user.Status), todos)
+		ctx.HTML(200, "index.html", gin.H{"todos": filterdTodos})
 	})
 
 	router.GET("/detail/:id", func(ctx *gin.Context) {
 		p := ctx.Param("id")
-		id, err := strconv.Atoi(p)
+		targetID, err := strconv.Atoi(p)
 		if err != nil {
 			panic(err)
 		}
-		var todo = repo.GetOne(id)
+		var todo = handler.NewTodo(infra.NewTodoRepo()).GetOne(targetID)
 		ctx.HTML(200, "detail.html", gin.H{"todo": todo})
 	})
 
