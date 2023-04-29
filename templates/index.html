@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja">
 
-<h2>追加</h2>
+<!-- <h2>追加</h2>
 <form method="post" action="/new">
     <p>内容<input type="text" name="text" size="30" placeholder="入力してください"></p>
     <p><input type="submit" value="Send"></p>
-</form>
+</form> -->
 
 
 <body>
@@ -20,12 +20,14 @@
             </tr>
         </thead>
         <tbody>
+
             {{range .todos}}
             <tr>
-                <td>
+                <!-- <td>
                     <a href="/detail/{{.ID}}">
                         {{.ID}}</a>
-                </td>
+                </td> -->
+                <td>{{.ID}}</td>
                 <td>{{.Text}}</td>
                 <td>{{.CreatedAt.Format "2006-01-02 15:04:05"}}</td>
                 <td>{{.UpdatedAt.Format "2006-01-02 15:04:05"}}</td>
