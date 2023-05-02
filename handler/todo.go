@@ -15,3 +15,8 @@ func (t *Todo) Get() []*todo.Todo {
 	todos := t.repo.Get()
 	return todos
 }
+
+func (t *Todo) GetOne(targetID int) *todo.Todo {
+	todo := t.repo.GetOne(targetID)
+	return todo
+}

@@ -14,6 +14,5 @@ func TodoFilter(accessState int, todos []*todo.Todo) []*todo.Todo {
 	case 3:
 		result = []*todo.Todo{}
 	}
-
 	return result
 }

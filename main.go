@@ -16,7 +16,7 @@ func main() {
 	router.LoadHTMLGlob("templates/*.html")
 
 	router.GET("/", func(ctx *gin.Context) {
-		user := user.User{Status: 3}
+		user := user.User{Status: 1}
 		todos := handler.NewTodo(infra.NewTodoRepo()).Get()
 		filterdTodos := usecase.TodoFilter(int(user.Status), todos)
 		ctx.HTML(200, "index.html", gin.H{"todos": filterdTodos})
