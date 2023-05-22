@@ -2,6 +2,7 @@ package handler
 
 import (
 	"go-qr-app/domain/model/todo"
+	"go-qr-app/domain/model/user"
 	repo "go-qr-app/domain/repository"
 )
 
@@ -13,5 +14,27 @@ func NewTodo(repo repo.Todo) *Todo {
 
 func (t *Todo) Get() []*todo.Todo {
 	todos := t.repo.Get()
-	return todos
+	user := user.User{Status: 1}
+	return AllowedTodo(int(user.Status), todos)
+}
+
+func (t *Todo) GetOne(targetID int) *todo.Todo {
+	todo := t.repo.GetOne(targetID)
+	return todo
+}
+
+func AllowedTodo(accessState int, todos []*todo.Todo) []*todo.Todo {
+	//渡されたuserの権限に応じて、返すtodoを変える
+	var result []*todo.Todo
+	switch accessState {
+	case 0:
+		result = todos
+	case 1:
+		result = todos
+	case 2:
+		result = todos
+	case 3:
+		result = []*todo.Todo{}
+	}
+	return result
 }

@@ -45,3 +45,38 @@ func (*Todo) Get() []*todo.Todo {
 	}
 	return todos
 }
+
+func (*Todo) GetOne(targetID int) *todo.Todo {
+	var todos = []*todo.Todo{
+		{
+			ID:         1,
+			Text:       "test1",
+			CreatedAt:  time.Now(),
+			UpdatedAt:  time.Now(),
+			DeleatedAt: time.Time{},
+		},
+		{
+			ID: 2, Text: "test2",
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
+		},
+		{
+			ID:        3,
+			Text:      "test3",
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
+		},
+		{
+			ID:        4,
+			Text:      "test4",
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
+		},
+	}
+	for _, todo := range todos {
+		if todo.ID == targetID {
+			return todo
+		}
+	}
+	return nil
+}
