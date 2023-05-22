@@ -24,6 +24,7 @@ func (t *Todo) GetOne(targetID int) *todo.Todo {
 }
 
 func AllowedTodo(accessState int, todos []*todo.Todo) []*todo.Todo {
+	//渡されたuserの権限に応じて、返すtodoを変える
 	var result []*todo.Todo
 	switch accessState {
 	case 0:
