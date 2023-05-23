@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"go-qr-app/handler"
 	"go-qr-app/infra"
 	"math/rand"
@@ -32,11 +31,8 @@ func main() {
 
 	router.POST("/new", func(ctx *gin.Context) {
 		id := rand.Int()
-		fmt.Println(id)
 		text := ctx.PostForm("text")
-		fmt.Println(text)
 		handler.NewTodo(infra.NewTodoRepo()).Create(id, text)
-		fmt.Println("create done🔥")
 		todos := handler.NewTodo(infra.NewTodoRepo()).Create(id, text)
 		ctx.HTML(200, "index.html", gin.H{"todos": todos})
 
