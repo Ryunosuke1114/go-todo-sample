@@ -80,3 +80,13 @@ func (*Todo) GetOne(targetID int) *todo.Todo {
 	}
 	return nil
 }
+
+func (*Todo) Create(id int, text string) *todo.Todo {
+	newTodo := &todo.Todo{
+		ID:        id,
+		Text:      text,
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+	}
+	return newTodo
+}
