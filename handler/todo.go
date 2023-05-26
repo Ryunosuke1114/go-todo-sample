@@ -24,7 +24,7 @@ func (t *Todo) GetOne(targetID int) *todo.Todo {
 }
 
 func (t *Todo) Create(id int, text string) []*todo.Todo {
-	user := user.User{Status: 3}
+	user := user.User{Status: 0}
 	//isValidがtrueの場合のみ、新しいTodoを作成する
 	isValid := checkAccessStatus(int(user.Status))
 	if isValid {
