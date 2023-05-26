@@ -3,6 +3,7 @@ package main
 import (
 	"go-qr-app/handler"
 	"go-qr-app/infra"
+	"math/rand"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -28,12 +29,14 @@ func main() {
 		ctx.HTML(200, "detail.html", gin.H{"todo": todo})
 	})
 
-	// 	router.POST("/new", func(ctx *gin.Context) {
-	// 		id := rand.Int()
-	// 		text := ctx.PostForm("text")
-	// 		CreateTodo(id, text)
-	// 		ctx.Redirect(302, "/")
-	// 	})
+	router.POST("/new", func(ctx *gin.Context) {
+		id := rand.Int()
+		text := ctx.PostForm("text")
+		handler.NewTodo(infra.NewTodoRepo()).Create(id, text)
+		todos := handler.NewTodo(infra.NewTodoRepo()).Create(id, text)
+		ctx.HTML(200, "index.html", gin.H{"todos": todos})
+
+	})
 
 	// 	router.POST("/update/:id", func(ctx *gin.Context) {
 	// 		fmt.Println("PUT now")

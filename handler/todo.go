@@ -23,6 +23,20 @@ func (t *Todo) GetOne(targetID int) *todo.Todo {
 	return todo
 }
 
+func (t *Todo) Create(id int, text string) []*todo.Todo {
+	user := user.User{Status: 0}
+	//isValidがtrueの場合のみ、新しいTodoを作成する
+	isValid := checkAccessStatus(int(user.Status))
+	if isValid {
+		newTodo := t.repo.Create(id, text)
+		todos := t.repo.Get()
+		todos = append(todos, newTodo)
+		return todos
+	}
+	todos := t.repo.Get()
+	return todos
+}
+
 func AllowedTodo(accessState int, todos []*todo.Todo) []*todo.Todo {
 	//渡されたuserの権限に応じて、返すtodoを変える
 	var result []*todo.Todo
@@ -37,4 +51,19 @@ func AllowedTodo(accessState int, todos []*todo.Todo) []*todo.Todo {
 		result = []*todo.Todo{}
 	}
 	return result
+}
+
+func checkAccessStatus(accessStatus int) bool {
+	var isValid bool
+	switch accessStatus {
+	case 0:
+		isValid = true
+	case 1:
+		isValid = true
+	case 2:
+		isValid = true
+	case 3:
+		isValid = false
+	}
+	return isValid
 }

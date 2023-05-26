@@ -12,7 +12,4 @@ type Todo struct {
 	DeleatedAt time.Time
 }
 
-//何かしらのバリデーション
-// func validate(){
 
-// }
