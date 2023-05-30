@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"go-qr-app/domain/model/todo"
 	"go-qr-app/domain/model/user"
 	repo "go-qr-app/domain/repository"
@@ -35,6 +36,19 @@ func (t *Todo) Create(id int, text string) []*todo.Todo {
 	}
 	todos := t.repo.Get()
 	return todos
+}
+
+func (t *Todo) Update(id int, text string) *todo.Todo {
+	user := user.User{Status: 0}
+	//isValidがtrueの場合のみ、Todoを更新する
+	isValid := checkAccessStatus(int(user.Status))
+	if isValid {
+		todo := t.repo.GetOne(id)
+		t.repo.Update(id, text)
+		return todo
+	}
+	fmt.Println("You don't have permission to update")
+	return nil
 }
 
 func AllowedTodo(accessState int, todos []*todo.Todo) []*todo.Todo {

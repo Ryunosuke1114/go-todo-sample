@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"go-qr-app/handler"
 	"go-qr-app/infra"
 	"math/rand"
@@ -35,20 +36,19 @@ func main() {
 		handler.NewTodo(infra.NewTodoRepo()).Create(id, text)
 		todos := handler.NewTodo(infra.NewTodoRepo()).Create(id, text)
 		ctx.HTML(200, "index.html", gin.H{"todos": todos})
-
 	})
 
-	// 	router.POST("/update/:id", func(ctx *gin.Context) {
-	// 		fmt.Println("PUT now")
-	// 		n := ctx.Param("id")
-	// 		id, err := strconv.Atoi(n)
-	// 		if err != nil {
-	// 			panic(err)
-	// 		}
-	// 		text := ctx.PostForm("text")
-	// 		UpdateTodo(id, text)
-	// 		ctx.Redirect(302, "/")
-	// 	})
+	router.POST("/update/:id", func(ctx *gin.Context) {
+		fmt.Println("PUT now")
+		n := ctx.Param("id")
+		id, err := strconv.Atoi(n)
+		if err != nil {
+			panic(err)
+		}
+		text := ctx.PostForm("text")
+		handler.NewTodo(infra.NewTodoRepo()).Update(id, text)
+		ctx.Redirect(302, "/")
+	})
 
 	// 	router.POST("/delete/:id", func(ctx *gin.Context) {
 	// 		n := ctx.Param("id")
