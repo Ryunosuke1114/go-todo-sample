@@ -62,27 +62,6 @@ func main() {
 	router.Run()
 }
 
-// func CreateTodo(id int, text string) {
-// 	newTodo := entity.Todo{
-// 		ID:        id,
-// 		Text:      text,
-// 		CreatedAt: time.Now(),
-// 		UpdatedAt: time.Now(),
-// 	}
-
-// 	todos = append(todos, newTodo)
-// }
-
-// func UpdateTodo(id int, text string) {
-// 	//todosのIDが一致するものを更新する
-// 	for i, todo := range todos {
-// 		if todo.ID == id {
-// 			todos[i].Text = text
-// 			todos[i].UpdatedAt = time.Now()
-// 		}
-// 	}
-// }
-
 // // todosのIDが一致するものを削除する
 //
 //	func DeleteTodo(id int) {
