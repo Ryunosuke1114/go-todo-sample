@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"go-qr-app/handler"
 	"go-qr-app/infra"
 	"math/rand"
@@ -35,20 +36,19 @@ func main() {
 		handler.NewTodo(infra.NewTodoRepo()).Create(id, text)
 		todos := handler.NewTodo(infra.NewTodoRepo()).Create(id, text)
 		ctx.HTML(200, "index.html", gin.H{"todos": todos})
-
 	})
 
-	// 	router.POST("/update/:id", func(ctx *gin.Context) {
-	// 		fmt.Println("PUT now")
-	// 		n := ctx.Param("id")
-	// 		id, err := strconv.Atoi(n)
-	// 		if err != nil {
-	// 			panic(err)
-	// 		}
-	// 		text := ctx.PostForm("text")
-	// 		UpdateTodo(id, text)
-	// 		ctx.Redirect(302, "/")
-	// 	})
+	router.POST("/update/:id", func(ctx *gin.Context) {
+		fmt.Println("PUT now")
+		n := ctx.Param("id")
+		id, err := strconv.Atoi(n)
+		if err != nil {
+			panic(err)
+		}
+		text := ctx.PostForm("text")
+		handler.NewTodo(infra.NewTodoRepo()).Update(id, text)
+		ctx.Redirect(302, "/")
+	})
 
 	// 	router.POST("/delete/:id", func(ctx *gin.Context) {
 	// 		n := ctx.Param("id")
@@ -61,27 +61,6 @@ func main() {
 	// 	})
 	router.Run()
 }
-
-// func CreateTodo(id int, text string) {
-// 	newTodo := entity.Todo{
-// 		ID:        id,
-// 		Text:      text,
-// 		CreatedAt: time.Now(),
-// 		UpdatedAt: time.Now(),
-// 	}
-
-// 	todos = append(todos, newTodo)
-// }
-
-// func UpdateTodo(id int, text string) {
-// 	//todosのIDが一致するものを更新する
-// 	for i, todo := range todos {
-// 		if todo.ID == id {
-// 			todos[i].Text = text
-// 			todos[i].UpdatedAt = time.Now()
-// 		}
-// 	}
-// }
 
 // // todosのIDが一致するものを削除する
 //
