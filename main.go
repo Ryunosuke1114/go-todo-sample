@@ -62,11 +62,3 @@ func main() {
 	router.Run()
 }
 
-// // todosのIDが一致するものを削除する
-//
-//	func DeleteTodo(id int) {
-//		for i, todo := range todos {
-//			if todo.ID == id {
-//				todos = append(todos[:i], todos[i+1:]...)
-//			}
-//		}
