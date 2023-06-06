@@ -51,6 +51,16 @@ func (t *Todo) Update(id int, text string) *todo.Todo {
 	return nil
 }
 
+func (t *Todo) Delete(id int) {
+	user := user.User{Status: 0}
+	//isValidがtrueの場合のみ、Todoを削除する
+	isValid := checkAccessStatus(int(user.Status))
+	if isValid {
+		t.repo.Delete(id)
+	}
+	fmt.Println("You don't have permission to delete")
+}
+
 func AllowedTodo(accessState int, todos []*todo.Todo) []*todo.Todo {
 	//渡されたuserの権限に応じて、返すtodoを変える
 	var result []*todo.Todo

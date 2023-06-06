@@ -75,3 +75,14 @@ func (*Todo) Update(id int, text string) {
 		}
 	}
 }
+
+func (*Todo) Delete(id int) {
+	//新しい配列を作成し、削除対象のTodo以外を新しい配列に追加する
+	var newTodos []*todo.Todo
+	for _, todo := range todos {
+		if todo.ID != id {
+			newTodos = append(newTodos, todo)
+		}
+	}
+	todos = newTodos
+}
