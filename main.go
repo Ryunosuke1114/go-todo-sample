@@ -50,23 +50,14 @@ func main() {
 		ctx.Redirect(302, "/")
 	})
 
-	// 	router.POST("/delete/:id", func(ctx *gin.Context) {
-	// 		n := ctx.Param("id")
-	// 		id, err := strconv.Atoi(n)
-	// 		if err != nil {
-	// 			panic(err)
-	// 		}
-	// 		DeleteTodo(id)
-	// 		ctx.Redirect(302, "/")
-	// 	})
+	router.POST("/delete/:id", func(ctx *gin.Context) {
+		n := ctx.Param("id")
+		id, err := strconv.Atoi(n)
+		if err != nil {
+			panic(err)
+		}
+		handler.NewTodo(infra.NewTodoRepo()).Delete(id)
+		ctx.Redirect(302, "/")
+	})
 	router.Run()
 }
-
-// // todosのIDが一致するものを削除する
-//
-//	func DeleteTodo(id int) {
-//		for i, todo := range todos {
-//			if todo.ID == id {
-//				todos = append(todos[:i], todos[i+1:]...)
-//			}
-//		}
